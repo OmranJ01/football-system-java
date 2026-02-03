@@ -50,4 +50,14 @@ public class PlayerRepository {
         return res;
     }
 
+    public boolean contains(int id)
+    {
+        if(map.containsKey(id))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
 }
