@@ -22,6 +22,9 @@ public class AvailabilitySchedule {
     {
         return days.get(day).addSlot(inp);
     }
+    public void bookSlot(DayOfWeek day, TimeSlot slot) {
+        days.get(day).bookSlot(slot);
+    }
 
     public boolean removeSlot(DayOfWeek day,TimeSlot inp)
     {

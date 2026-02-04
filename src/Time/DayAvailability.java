@@ -1,23 +1,24 @@
 package Time;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
 public class DayAvailability {
 
-    private final List<TimeSlot> slots;
+    private final List<TimeSlot> slots;        // availability windows (when stadium/user is free)
+    private final List<TimeSlot> bookedSlots;  // bookings inside the availability windows
 
     public DayAvailability() {
         this.slots = new ArrayList<>();
+        this.bookedSlots = new ArrayList<>();
     }
 
-    // Add slot only if it doesn't overlap existing ones, keep sorted
     public boolean addSlot(TimeSlot newSlot) {
 
         for (TimeSlot s : slots) {
             if (s.overlaps(newSlot)) {
-                return false; // overlap -> reject
+                return false;
             }
         }
 
@@ -26,30 +27,60 @@ public class DayAvailability {
         return true;
     }
 
-    // True if any existing slot fully contains the requested slot
-    public boolean isAvailable(TimeSlot requested) {
-        for (TimeSlot s : slots) {
-            if (s.contains(requested)) {
-                return true;
+    public boolean removeSlot(TimeSlot slot) {
+
+        if (slot == null) {
+            throw new IllegalArgumentException("slot cannot be null !");
+        }
+
+        // safety: don't allow removing availability if there is a booking inside it
+        for (TimeSlot b : bookedSlots) {
+            if (slot.contains(b) || b.overlaps(slot)) {
+                throw new RuntimeException("Cannot remove availability that has bookings !");
             }
         }
-        return false;
+
+        return slots.remove(slot); // removes only if TimeSlot equals() matches
     }
 
-    public boolean removeSlot(TimeSlot toRemove)
-    {
-        for(TimeSlot it : slots)
-        {
-            if(it == toRemove)
-            {
-                slots.remove(toRemove);
-                return true;
+
+    public boolean isAvailable(TimeSlot requested) {
+
+        // must be within one of the availability windows
+        boolean insideAvailability = false;
+        for (TimeSlot s : slots) {
+            if (s.contains(requested)) {   // you need TimeSlot.contains(...)
+                insideAvailability = true;
+                break;
             }
         }
-        return false;
+        if (!insideAvailability) return false;
+
+        // must NOT overlap an already booked slot
+        for (TimeSlot b : bookedSlots) {
+            if (b.overlaps(requested)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void bookSlot(TimeSlot requested) {
+
+        if (!isAvailable(requested)) {
+            throw new RuntimeException("Slot is not available to book !");
+        }
+
+        bookedSlots.add(requested);
+        Collections.sort(bookedSlots, (a, b) -> a.getStart().compareTo(b.getStart()));
     }
 
     public List<TimeSlot> getSlots() {
-        return slots;
+        return Collections.unmodifiableList(slots);
+    }
+
+    public List<TimeSlot> getBookedSlots() {
+        return Collections.unmodifiableList(bookedSlots);
     }
 }
