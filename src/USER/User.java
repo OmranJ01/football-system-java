@@ -44,4 +44,9 @@ public abstract class User
     {
         this.town = newTown;
     }
+
+    public String getTown() {
+
+        return this.town;
+    }
 }

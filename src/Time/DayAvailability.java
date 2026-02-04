@@ -46,7 +46,6 @@ public class DayAvailability {
 
     public boolean isAvailable(TimeSlot requested) {
 
-        // must be within one of the availability windows
         boolean insideAvailability = false;
         for (TimeSlot s : slots) {
             if (s.contains(requested)) {   // you need TimeSlot.contains(...)
@@ -56,7 +55,6 @@ public class DayAvailability {
         }
         if (!insideAvailability) return false;
 
-        // must NOT overlap an already booked slot
         for (TimeSlot b : bookedSlots) {
             if (b.overlaps(requested)) {
                 return false;

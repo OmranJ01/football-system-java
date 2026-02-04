@@ -39,11 +39,11 @@ public class PlayerRepository {
         return map.get(id);
     }
 
-    public List<Integer> getAll()
+    public List<Player> getAll()
     {
-        List<Integer> res = new ArrayList<>();
+        List<Player> res = new ArrayList<>();
 
-        for(Integer it : map.keySet())
+        for(Player it : map.values())
         {
             res.add(it);
         }
