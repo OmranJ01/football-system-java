@@ -33,14 +33,13 @@ public class DayAvailability {
             throw new IllegalArgumentException("slot cannot be null !");
         }
 
-        // safety: don't allow removing availability if there is a booking inside it
         for (TimeSlot b : bookedSlots) {
             if (slot.contains(b) || b.overlaps(slot)) {
                 throw new RuntimeException("Cannot remove availability that has bookings !");
             }
         }
 
-        return slots.remove(slot); // removes only if TimeSlot equals() matches
+        return slots.remove(slot);
     }
 
 

@@ -105,7 +105,6 @@ public class BookingService {
 
                 Stadium stadium = stadiumRepository.getStadium(booking.getStadiumId());
 
-                // block the stadium slot now
                 stadium.getSchedule().bookSlot(booking.getDay(), booking.getSlot());
 
                 booking.confirm();

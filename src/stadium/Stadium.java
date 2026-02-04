@@ -61,7 +61,7 @@ public class Stadium {
         this.pricePerHour = newPrice;
     }
 
-    public void updateOwmer(StadiumOwner newOwner)
+    public void updateOwner(StadiumOwner newOwner)
     {
         if(owner == newOwner || newOwner == null)
         {

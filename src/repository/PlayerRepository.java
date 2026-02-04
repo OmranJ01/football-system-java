@@ -7,7 +7,7 @@ public class PlayerRepository {
 
     private final Map<Integer,Player> map;
 
-    PlayerRepository()
+    public PlayerRepository()
     {
         map = new HashMap<>();
     }

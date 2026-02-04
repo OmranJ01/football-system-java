@@ -10,7 +10,7 @@ public class Player extends User {
     private final Set<Integer> outgoingRequests;
     private final Set<Integer> pendingRequests;
 
-    Player(int id,String name,String town)
+   public Player(int id,String name,String town)
     {
         super(id,name,town);
         friends = new HashSet<>();

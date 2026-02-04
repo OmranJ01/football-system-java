@@ -36,7 +36,7 @@ public class AvailabilitySchedule {
         return days.get(day).isAvailable(inp);
     }
 
-    public DayAvailability detDayAvailability(DayOfWeek day)
+    public DayAvailability getDayAvailability(DayOfWeek day)
     {
         return days.get(day);
     }

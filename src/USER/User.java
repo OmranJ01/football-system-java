@@ -11,7 +11,7 @@ public abstract class User
     private String name;
     private String town;
 
-    User(int id, String name,String town)
+   public User(int id, String name,String town)
     {
 
         if (id <= 0) throw new IllegalArgumentException("id must be positive");
