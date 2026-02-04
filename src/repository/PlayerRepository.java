@@ -52,12 +52,7 @@ public class PlayerRepository {
 
     public boolean contains(int id)
     {
-        if(map.containsKey(id))
-        {
-            return true;
-        }
-
-        return false;
+        return map.containsKey(id);
     }
 
 }
