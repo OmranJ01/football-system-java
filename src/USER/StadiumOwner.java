@@ -6,9 +6,9 @@ import java.util.Set;
 
 public class StadiumOwner extends User{
 
-    private final Set<Stadium> stadiums;
+    private Set<Stadium> stadiums;
 
-   public StadiumOwner(Integer id,String name,String town)
+    public StadiumOwner(Integer id,String name,String town)
     {
         super(id,name,town);
         stadiums = new HashSet<>();
